@@ -14,6 +14,15 @@ curl -s "https://api.telegram.org/bot${BOT_API_KEY}/sendmessage" --data "text=$M
 echo -e;
 }
 
+# Make clean build
+echo "${blu}Make clean build?${txtrst}"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) make clean && make clobber ; break;;
+        No ) break;;
+    esac
+done
+
 # supported devices
 echo "${blu}Which device you want to build?${txtrst}"
 select yn in "rolex" "santoni"; do
