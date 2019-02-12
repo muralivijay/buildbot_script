@@ -1,4 +1,5 @@
 #!/bin/bash
+# Author- SwapnilSoni1999, Muralivijay
 
 #sync with configs
 source bot.conf
