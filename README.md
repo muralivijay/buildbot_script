@@ -19,7 +19,7 @@ How to use:
 ```
 5. Misc Changes (these configs will be sent as message and wont affect any change in build)
 `ZIPNAME` will send package name to send
-`BUILD_TYPE` will set build type for eg. `Test` or `Alpha`
+`BUILD_TYPE` will set build type for eg. `Test` `Update` or `Alpha`
 `NOTES` will attach your message or note to send over telegram
 
 (PS: in some cases like AEX build command is `mka aex` according to aex build docs, you can change build command from [here](https://github.com/SwapnilSoni1999/buildbot_script/blob/master/bot.sh#L25)`)
