@@ -14,16 +14,27 @@ curl -s "https://api.telegram.org/bot${BOT_API_KEY}/sendmessage" --data "text=$M
 echo -e;
 }
 
-sendMessage "Starting build $ROM for $DEVICE"
+# supported devices
+echo "${blu}Which device you want to build?${txtrst}"
+select yn in "rolex" "santoni"; do
+    case $yn in
+        rolex ) sendMessage "Starting build $ROM for $DEVICE1" && lunch $ROM\_$DEVICE1-userdebug | tee lunch.log ; break;;
+        santoni ) sendMessage "Starting build $ROM for $DEVICE" && lunch $ROM\_$DEVICE-userdebug | tee lunch.log ; break;;
+    esac
+done
 
-#start build
-lunch $ROM\_$DEVICE-userdebug | tee lunch.log
 # catch lunch error
 if [ $? -eq 0 ]
 then
+        if [ $DEVICE1 ]; then
+       	echo "Bringup Done... Starting Build\(brunch\)"
+	sendMessage "Bringup Done... Starting build."
+	brunch $DEVICE1 | tee build.log
+        else
        	echo "Bringup Done... Starting Build\(brunch\)"
 	sendMessage "Bringup Done... Starting build."
 	brunch $DEVICE | tee build.log
+        fi
 #	mka aex | tee build.log
 	#catch brunch error
 	if [ $? -eq 0 ]
@@ -82,6 +93,15 @@ if [ $BUILD_FINISHED = true  ] ; then
 # Some Extra Summary to share
 MD5=`md5sum ${OUTPUT_LOC} | awk '{ print $1 }'`
 
+if [ $DEVICE1 ]; then
+read -r -d '' SUMMARY << EOM
+ROM: $ZIPNAME1
+Build: $BUILD_TYPE
+LINK: $SHARE
+NOTES: $NOTES
+MD5: $MD5
+EOM
+else
 read -r -d '' SUMMARY << EOM
 ROM: $ZIPNAME
 Build: $BUILD_TYPE
@@ -89,7 +109,7 @@ LINK: $SHARE
 NOTES: $NOTES
 MD5: $MD5
 EOM
-
+fi
                 curl -s "https://api.telegram.org/bot${BOT_API_KEY}/sendmessage" --data "text=$SUMMARY&chat_id=$CHAT_ID" 1> /dev/null
 echo -e;
 
