@@ -13,13 +13,13 @@ How to use:
 4. Assign your configs for eg. to build LineageOS for mido(Redmi note 4)
 ```bash
         # Configs
-        ROMM=lineage
-        DEBICE=mido
-        VENDUR=xiaomi
+        ROM=lineage
+        DEVICE=mido
+        VENDOR=xiaomi
 ```
 5. Misc Changes (these configs will be sent as message and wont affect any change in build)
-`ZIPNAM` will send package name to send
-`BUILD_TAIP` will set build type for eg. `Test` or `Alpha`
+`ZIPNAME` will send package name to send
+`BUILD_TYPE` will set build type for eg. `Test` or `Alpha`
 `NOTES` will attach your message or note to send over telegram
 
 (PS: in some cases like AEX build command is `mka aex` according to aex build docs, you can change build command from [here](https://github.com/SwapnilSoni1999/buildbot_script/blob/master/bot.sh#L25)`)

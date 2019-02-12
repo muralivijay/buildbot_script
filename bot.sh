@@ -14,22 +14,22 @@ curl -s "https://api.telegram.org/bot${BOT_API_KEY}/sendmessage" --data "text=$M
 echo -e;
 }
 
-sendMessage "Starting build $ROMM for $DEBICE"
+sendMessage "Starting build $ROM for $DEVICE"
 
 #start build
-lunch $ROMM\_$DEBICE-userdebug | tee lunch.log
+lunch $ROM\_$DEVICE-userdebug | tee lunch.log
 # catch lunch error
 if [ $? -eq 0 ]
 then
        	echo "Bringup Done... Starting Build\(brunch\)"
 	sendMessage "Bringup Done... Starting build."
-	brunch $DEBICE | tee build.log
+	brunch $DEVICE | tee build.log
 #	mka aex | tee build.log
 	#catch brunch error
 	if [ $? -eq 0 ]
 	then
-		echo "build DONEEE"
-		sendMessage "build DONE!"
+		echo "build DONE :)"
+		sendMessage "build DONE !"
 
 		BUILD_FINISHED=true
 		if [ $BUILD_FINISHED = true  ] ; then
@@ -83,8 +83,8 @@ if [ $BUILD_FINISHED = true  ] ; then
 MD5=`md5sum ${OUTPUT_LOC} | awk '{ print $1 }'`
 
 read -r -d '' SUMMARY << EOM
-ROM: $ZIPNAAM
-Build: $BUILD_TAIP
+ROM: $ZIPNAME
+Build: $BUILD_TYPE
 LINK: $SHARE
 NOTES: $NOTES
 MD5: $MD5
